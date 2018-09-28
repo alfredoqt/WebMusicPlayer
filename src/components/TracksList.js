@@ -2,14 +2,27 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const TracksList = ({ tracks }) => (
-    tracks.map(el => (
-        <div key={el.id}>{el.name}</div>
-    ))
-);
+// This might not be very reusable, but its easier
+import injectSheet from 'react-jss';
+import TrackListItem from './TrackListItem';
+
+const styles = {
+    trackList: {
+        width: '100%',
+    },
+};
+
+const TracksList = ({ tracks, classes, onPlayClick }) => {
+    return <ul className={classes.trackList}>
+        {tracks.map(el => (
+            <TrackListItem key={el.id} track={el}/>
+        ))}
+    </ul>
+};
 
 TracksList.propTypes = {
     tracks: PropTypes.array.isRequired,
 };
 
-export default TracksList;
+// Wrap it in a higher order component to inject the styles
+export default injectSheet(styles)(TracksList);

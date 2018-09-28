@@ -3,7 +3,7 @@
  * @description: Talks to any enpoints. I put all the keys and secret stuff here since it is not commercial.
  */
 
-import { firestore } from 'firebase';
+import { firestore, storage } from 'firebase';
 import { to } from '../utils';
 
 
@@ -21,5 +21,17 @@ export const getAllTracks = async () => {
     });
 
     return tracks;
+};
+
+export const getTrackDownloadUrl = async (track) => {
+    const storageRef = storage().ref();
+
+    const [error, response] = await to(storageRef.child(track.track).getDownloadURL());
+
+    if (error) {
+        throw new Error(error);
+    }
+
+    return response;
 };
 
