@@ -12,10 +12,10 @@ const styles = {
     },
 };
 
-const TracksList = ({ tracks, classes, onPlayClick }) => {
+const TracksList = ({ tracks, classes }) => {
     return <ul className={classes.trackList}>
-        {tracks.map(el => (
-            <TrackListItem key={el.id} track={el}/>
+        {tracks.map((el, index) => (
+            <TrackListItem key={el.id} track={el} index={index}/>
         ))}
     </ul>
 };

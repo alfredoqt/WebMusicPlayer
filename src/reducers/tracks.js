@@ -34,15 +34,36 @@ const tracks = (state = [], action) => {
     switch (action.type) {
     case 'FETCH_TRACKS_SUCCESS':
         return action.payload;
+    case 'SET_HOWL':
+        const { index, howl } = action.payload;
+        return [
+            ...state.slice(0, index),
+            {
+                ...state[index],
+                howl,
+            },
+            ...state.slice(index + 1),
+        ];
     default:
         return state;
     }
 }
 
-const current = (state = null, action) => {
+const currentIndex = (state = null, action) => {
     switch (action.type) {
-    case 'SET_CURRENT_TRACK':
+    case 'FETCH_TRACKS_SUCCESS':
+        return action.payload.length ? 0 : null;
+    case 'SET_CURRENT_INDEX':
         return action.payload;
+    default:
+        return state;
+    }
+}
+
+const playing = (state = false, action) => {
+    switch (action.type) {
+    case 'TOGGLE_PLAY':
+        return !state;
     default:
         return state;
     }
@@ -52,11 +73,13 @@ export default combineReducers({
     tracks,
     error,
     fetching,
-    current,
+    currentIndex,
+    playing
 });
 
 // State selectors
 export const getTracks = state => state.tracks;
 export const isFetching = state => state.fetching;
 export const getError = state => state.error;
-export const getCurrent = state => state.current;
+export const getCurrentIndex = state => state.currentIndex;
+export const isPlaying = state => state.playing;

@@ -6,6 +6,8 @@
 import React, { Component, Fragment } from 'react';
 import TracksListContainer from '../components/TracksListContainer';
 import Footer from '../components/Footer';
+import TrackPlayer from '../components/TrackPlayer';
+import TrackResumer from '../components/TrackResumer';
 
 
 class Main extends Component {
@@ -14,6 +16,8 @@ class Main extends Component {
             <Fragment>
                 <TracksListContainer />
                 <Footer />
+                <TrackPlayer />
+                <TrackResumer />
             </Fragment>
         );
     }

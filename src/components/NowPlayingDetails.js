@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 import AlbumPlaceholder from '../img/album-placeholder.jpg';
 
 import { connect } from 'react-redux';
-import { getCurrentTrack } from '../reducers';
+import { getCurrentIndex, getTracks } from '../reducers';
 
 const styles = {
     root: {
@@ -20,22 +20,26 @@ const styles = {
     },
 };
 
-const NowPlayingDetails = ({ classes, track }) => (
+const NowPlayingDetails = ({ classes, currentIndex, tracks }) => (
     <div className={classes.root}>
         <div className={classes.coverArtContainer}>
             <img src={AlbumPlaceholder} placeholder="Album" className={classes.coverArt}/>
         </div>
         <div>
-            { track 
-            ? (
+            { currentIndex !== null
+            ?
+            (
                 <Fragment>
-                    <div>{track.name}</div>
+                    <div>
+                        {tracks[currentIndex].name}
+                    </div>
                     <div>
                         Album
                     </div>
-                </Fragment>
+                </Fragment>    
             )
-            : (
+            :
+            (
                 <Fragment>
                     <div>
                         Complicado y Aturdido
@@ -44,11 +48,13 @@ const NowPlayingDetails = ({ classes, track }) => (
                         Album
                     </div>
                 </Fragment>
-            )}
+            )
+            }
         </div>
     </div>
 );
 
 export default connect(state => ({
-    track: getCurrentTrack(state),
+    tracks: getTracks(state),
+    currentIndex: getCurrentIndex(state),
 }))(injectSheet(styles)(NowPlayingDetails));

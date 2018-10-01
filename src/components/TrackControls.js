@@ -1,10 +1,15 @@
 import React from 'react';
-import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-import { FaPlayCircle, FaStepBackward, FaStepForward } from 'react-icons/fa';
+import { FaPlayCircle, FaStepBackward, FaStepForward, FaPauseCircle } from 'react-icons/fa';
 
 import injectSheet from 'react-jss';
+
+import ProgressSlider from './ProgressSlider';
+
+import { connect } from 'react-redux';
+import { setCurrentIndex, togglePlay } from '../actions';
+import { getTracks, getCurrentIndex, isPlaying } from '../reducers';
 
 const styles = {
     trackControls: {
@@ -15,17 +20,37 @@ const styles = {
     },
 };
 
-const Controls = ({ classes }) => (
+const Controls = ({
+    classes,
+    setCurrentIndex,
+    currentIndex,
+    tracks,
+    playing,
+    togglePlay,
+}) => (
     <div>
         <div className={classes.trackControls}>
-            <FaStepBackward />
-            <FaPlayCircle />
-            <FaStepForward />
-        </div>
-        <div>
-            <Slider defaultValue={50} />
+            <FaStepBackward onClick={() => {
+                setCurrentIndex(currentIndex === 0
+                    ? tracks.length - 1 : currentIndex - 1);
+            }} />
+            <div onClick={() => {togglePlay()}}>
+                { playing
+                    ?
+                    <FaPauseCircle />
+                    :
+                    <FaPlayCircle />
+                }
+            </div>
+            <FaStepForward onClick={() => {
+                setCurrentIndex((currentIndex + 1) % tracks.length);
+            }}/>
         </div>
     </div>
 );
 
-export default injectSheet(styles)(Controls);
+export default connect(state => ({
+    tracks: getTracks(state),
+    currentIndex: getCurrentIndex(state),
+    playing: isPlaying(state),
+}), { setCurrentIndex, togglePlay })(injectSheet(styles)(Controls));

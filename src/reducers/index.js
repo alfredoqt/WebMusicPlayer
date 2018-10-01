@@ -12,5 +12,7 @@ export const isFetchingTracks = state =>
     fromTracks.isFetching(state.tracks);
 export const getFetchTracksError = state =>
     fromTracks.getError(state.tracks);
-export const getCurrentTrack = state =>
-    fromTracks.getCurrent(state.tracks);
+export const getCurrentIndex = state =>
+    fromTracks.getCurrentIndex(state.tracks);
+export const isPlaying = state =>
+    fromTracks.isPlaying(state.tracks);

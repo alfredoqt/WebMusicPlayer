@@ -9,7 +9,7 @@ import { formatSeconds } from '../utils/string';
 import injectSheet from 'react-jss';
 
 import playButton from '../img/play-button.png';
-import { setCurrentTrack } from '../actions';
+import { setCurrentIndex } from '../actions';
 
 const styles = {
     trackElement: {
@@ -34,14 +34,14 @@ const styles = {
     },
 };
 
-const TrackListItem = ({ track, classes, setCurrentTrack }) => (
+const TrackListItem = ({ track, classes, setCurrentIndex, index }) => (
     <li key={track.id} className={classes.trackElement}>
         <div className={classes.trackHeader}>
             <img
                 src={playButton}
                 alt="Play"
                 className={classes.trackPlay}
-                onClick={() => { setCurrentTrack(track) }}
+                onClick={() => { setCurrentIndex(index)}}
             />
             <span>{track.name}</span>
             <span className={classes.trackDuration}>{formatSeconds(track.duration)}</span>
@@ -51,6 +51,7 @@ const TrackListItem = ({ track, classes, setCurrentTrack }) => (
 
 TrackListItem.propTypes = {
     track: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
 };
 
-export default connect(null, { setCurrentTrack })(injectSheet(styles)(TrackListItem));
+export default connect(null, { setCurrentIndex })(injectSheet(styles)(TrackListItem));

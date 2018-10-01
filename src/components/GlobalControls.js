@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+import { Howler } from 'howler';
 
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -13,13 +15,28 @@ const styles = {
         root: {
             width: '33.33%',
         }
-        }
+    }
 }
 
-const GlobalControls = ({ classes }) => (
-    <div className={classes.root}>
-        <Slider />
-    </div>
-);
+class GlobalControls extends Component {
+    state = {
+        value: 50,
+    }
+
+    handleChange = value => {
+        Howler.volume(value / 100.0);
+        this.setState({ value });
+    }
+
+    render() {
+        const { classes } = this.props;
+        const { value } = this.state;
+        return (
+            <div className={classes.root}>
+                <Slider value={value} onChange={this.handleChange}/>
+            </div>
+        );
+    }
+}
 
 export default injectSheet(styles)(GlobalControls);

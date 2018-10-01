@@ -32,7 +32,17 @@ export const fetchTracks = () => async dispatch => {
     dispatch(fetchTracksSuccess(response));
 }
 
-export const setCurrentTrack = (track) => ({
-    type: 'SET_CURRENT_TRACK',
-    payload: track,
-})
+export const setCurrentIndex = (index) => ({
+    type: 'SET_CURRENT_INDEX',
+    payload: index,
+});
+
+export const setHowl = (body) => ({
+    type: 'SET_HOWL',
+    payload: body,
+});
+
+export const togglePlay = () => ({
+    type: 'TOGGLE_PLAY',
+});
+
