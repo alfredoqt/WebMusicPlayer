@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { formatSeconds } from '../utils/string';
 
 // This might not be very reusable, but its easier
 import injectSheet from 'react-jss';
 
 import playButton from '../img/play-button.png';
+import { setCurrentTrack } from '../actions';
 
 const styles = {
     trackElement: {
@@ -31,10 +34,15 @@ const styles = {
     },
 };
 
-const TrackListItem = ({ track, classes }) => (
+const TrackListItem = ({ track, classes, setCurrentTrack }) => (
     <li key={track.id} className={classes.trackElement}>
         <div className={classes.trackHeader}>
-            <img src={playButton} alt="Play" className={classes.trackPlay}/>
+            <img
+                src={playButton}
+                alt="Play"
+                className={classes.trackPlay}
+                onClick={() => { setCurrentTrack(track) }}
+            />
             <span>{track.name}</span>
             <span className={classes.trackDuration}>{formatSeconds(track.duration)}</span>
         </div>
@@ -45,4 +53,4 @@ TrackListItem.propTypes = {
     track: PropTypes.object.isRequired,
 };
 
-export default injectSheet(styles)(TrackListItem);
+export default connect(null, { setCurrentTrack })(injectSheet(styles)(TrackListItem));

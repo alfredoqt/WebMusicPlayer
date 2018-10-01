@@ -7,11 +7,10 @@ export default combineReducers({
 
 // State selectors
 export const getTracks = state =>
-    fromTracks.getIds(state.tracks)
-    .map(id => fromTracks.getById(state.tracks, id));
-export const getTrackById = (state, id) =>
-    fromTracks.getById(state.tracks, id);
+    fromTracks.getTracks(state.tracks);
 export const isFetchingTracks = state =>
     fromTracks.isFetching(state.tracks);
 export const getFetchTracksError = state =>
     fromTracks.getError(state.tracks);
+export const getCurrentTrack = state =>
+    fromTracks.getCurrent(state.tracks);

@@ -1,7 +1,9 @@
 import React from 'react';
 
 import injectSheet from 'react-jss';
-import Controls from './Controls';
+import TrackControls from './TrackControls';
+import NowPlayingDetails from './NowPlayingDetails';
+import GlobalControls from './GlobalControls';
 
 const styles = {
     root: {
@@ -10,22 +12,31 @@ const styles = {
         width: '100%',
         zIndex: 101,
         backgroundColor: '#181818',
-        height: '90px',
     },
     content: {
         display: 'flex',
         justifyContent: 'space-between',
         height: '100%',
         alignItems: 'center',
+        padding: '16px',
     },
+    footerItem: {
+        flex: 1,
+    }
 };
 
 const Footer = ({ classes }) => (
     <div className={classes.root}>
         <div className={classes.content}>
-            <div>Hello</div>
-            <Controls />
-            <div>Hello</div>
+            <div className={classes.footerItem}>
+                <NowPlayingDetails />
+            </div>
+            <div className={classes.footerItem}>
+                <TrackControls />
+            </div>
+            <div className={classes.footerItem}>
+                <GlobalControls />
+            </div>
         </div>
     </div>
 );

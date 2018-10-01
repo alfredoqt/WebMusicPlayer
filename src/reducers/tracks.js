@@ -30,33 +30,33 @@ const error = (state = null, action) => {
     }
 }
 
-const byId = (state = {}, action) => {
+const tracks = (state = [], action) => {
     switch (action.type) {
     case 'FETCH_TRACKS_SUCCESS':
-        return action.payload.entities.tracks || action.payload.entities;
+        return action.payload;
     default:
         return state;
     }
 }
 
-const ids = (state = [], action) => {
+const current = (state = null, action) => {
     switch (action.type) {
-    case 'FETCH_TRACKS_SUCCESS':
-        return action.payload.result;
+    case 'SET_CURRENT_TRACK':
+        return action.payload;
     default:
         return state;
     }
-}
+};
 
 export default combineReducers({
-    ids,
-    byId,
+    tracks,
     error,
     fetching,
+    current,
 });
 
 // State selectors
-export const getIds = state => state.ids;
-export const getById = (state, id) => state.byId[id]; // For faster lookup, data is normalized in the action creators
+export const getTracks = state => state.tracks;
 export const isFetching = state => state.fetching;
 export const getError = state => state.error;
+export const getCurrent = state => state.current;

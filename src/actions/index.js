@@ -9,7 +9,7 @@ const fetchTracksRequest = () => ({
 
 const fetchTracksSuccess = (response) => ({
     type: 'FETCH_TRACKS_SUCCESS',
-    payload: normalize(response, schema.arrayOfTracks), // For faster access
+    payload: response, // For faster access
 });
 
 const fetchTracksFailure = (error) => ({
@@ -31,3 +31,8 @@ export const fetchTracks = () => async dispatch => {
 
     dispatch(fetchTracksSuccess(response));
 }
+
+export const setCurrentTrack = (track) => ({
+    type: 'SET_CURRENT_TRACK',
+    payload: track,
+})
