@@ -46,3 +46,8 @@ export const togglePlay = () => ({
     type: 'TOGGLE_PLAY',
 });
 
+export const setPlay = status => ({
+    type: 'SET_PLAY',
+    payload: status,
+})
+
