@@ -2,7 +2,7 @@
   "name": "mini-player",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://AlfredoQT.github.io/WebMusicPlayer/",
+  "homepage": "https://alfredoqt.github.io/WebMusicPlayer/",
   "dependencies": {
     "axios": "^0.18.0",
     "buzz": "^1.2.1",
