@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://alfredoqt.github.io/WebMusicPlayer/",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.3",
     "buzz": "^1.2.1",
     "classnames": "^2.2.6",
     "firebase": "^5.5.2",
